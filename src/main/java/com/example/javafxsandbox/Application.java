@@ -5,6 +5,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+//import javafx.scene.media.Media;
+//import javafx.scene.media.MediaPlayer;
 
 public class Application extends javafx.application.Application {
 
@@ -21,6 +23,15 @@ public class Application extends javafx.application.Application {
 
         stage.setTitle("JavaFX Sandbox!");
         stage.getIcons().add(new Image("icon.png"));
+        stage.setResizable(false);
+
+        /*
+
+        Media media = new Media("file:///Movies/test.mp3"); //replace /Movies/test.mp3 with your file
+        MediaPlayer player = new MediaPlayer(media);
+        player.play();
+
+        */
 
 
         stage.setScene(startScene);
