@@ -2,6 +2,8 @@ package Paint;
 
 import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -17,55 +19,33 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 
-public class PaintApplication extends Application {
+public class PaintApplication {
 
-    @Override
-    public void start(Stage primaryStage) {
-        Canvas canvas = new Canvas(480, 480);
-        GraphicsContext gc = canvas.getGraphicsContext2D();
+    private Stage stage;
 
-        gc.setFill(Color.BLACK);
+    public void loadFXML() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/PaintApplication.fxml"));
 
-        Button saveButton = new Button("Save n exit");
-        saveButton.setTranslateX(195);
-        saveButton.setTranslateY(220);
+            Parent root = loader.load();
 
-        Button clearButton = new Button("Clear");
-        clearButton.setTranslateX(-210);
-        clearButton.setTranslateY(220);
+            Controller controller = loader.getController();
 
-        saveButton.setOnAction(event -> {
-            FileChooser fileChooser = new FileChooser();
-            File file = fileChooser.showSaveDialog(primaryStage);
-            if (file != null) {
-                try {
-                    WritableImage image = new WritableImage(480, 480);
-                    canvas.snapshot(null, image);
-                    ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+            Scene scene = new Scene(root);
 
-            canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, e -> {
-                double x = e.getX();
-                double y = e.getY();
-                gc.fillOval(x, y, 10, 10);
-            });
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-        clearButton.setOnAction(event -> gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight()));
+    public void StartPaintApplicationStage() {
+        stage = new Stage();
+        stage.setTitle("Paint");
+    }
 
-        StackPane root = new StackPane(canvas);
-        Scene scene = new Scene(root);
-        primaryStage.setResizable(false);
-        root.getChildren().add(saveButton);
-        root.getChildren().add(clearButton);
-
-
-        primaryStage.setTitle("Drawing Application");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
+    public void showStage() {
+        loadFXML();
+        stage.show();
     }
 }

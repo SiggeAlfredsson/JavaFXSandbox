@@ -4,6 +4,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 public class Application extends javafx.application.Application {
@@ -24,10 +26,9 @@ public class Application extends javafx.application.Application {
         stage.setResizable(false);
 
 
-       /* Media media = new Media("music.mp3");  // This does not work. I think code is fine, just that it don't recognize the mp3 file as a mp3.
+      /*  Media media = new Media("music.mp3");  // This does not work. I think code is fine, just that it don't recognize the mp3 file as a mp3.
         MediaPlayer player = new MediaPlayer(media);
         player.play(); */
-
 
 
         stage.setScene(startScene);

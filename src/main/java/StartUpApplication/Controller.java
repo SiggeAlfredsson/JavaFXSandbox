@@ -12,16 +12,17 @@ public class Controller {
 
 
 
+
     public void paint(javafx.event.ActionEvent actionEvent) {
 
         Button button = (Button) actionEvent.getSource();
         Stage stage = (Stage) button.getScene().getWindow();
         stage.hide();
 
-        StartPaint startDrawing = new StartPaint();
-        startDrawing.StartPaintStage();
+        StartPaint startPaint = new StartPaint();
+        startPaint.StartPaintStage();
 
-        startDrawing.showStage();
+        startPaint.showStage();
 
 
 
