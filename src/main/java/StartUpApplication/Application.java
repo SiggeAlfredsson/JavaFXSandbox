@@ -28,6 +28,8 @@ public class Application extends javafx.application.Application {
         MediaPlayer player = new MediaPlayer(media);
         player.play(); */
 
+
+
         stage.setScene(startScene);
         stage.show();
     }

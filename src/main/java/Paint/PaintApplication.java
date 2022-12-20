@@ -16,22 +16,15 @@ import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.atomic.AtomicBoolean;
 
-public class DrawingApplication extends Application {
-    public static void main(String[] args) {
-        launch(args);
-    }
+public class PaintApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-
         Canvas canvas = new Canvas(480, 480);
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
-
         gc.setFill(Color.BLACK);
-
 
         Button saveButton = new Button("Save n exit");
         saveButton.setTranslateX(195);
@@ -41,8 +34,6 @@ public class DrawingApplication extends Application {
         clearButton.setTranslateX(-210);
         clearButton.setTranslateY(220);
 
-
-
         saveButton.setOnAction(event -> {
             FileChooser fileChooser = new FileChooser();
             File file = fileChooser.showSaveDialog(primaryStage);
@@ -50,15 +41,12 @@ public class DrawingApplication extends Application {
                 try {
                     WritableImage image = new WritableImage(480, 480);
                     canvas.snapshot(null, image);
-                    ImageIO.write(SwingFXUtils.fromFXImage(image, null), "svg", file);
+                    ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         });
-
-
-
 
             canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, e -> {
                 double x = e.getX();
@@ -66,11 +54,7 @@ public class DrawingApplication extends Application {
                 gc.fillOval(x, y, 10, 10);
             });
 
-
         clearButton.setOnAction(event -> gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight()));
-
-
-
 
         StackPane root = new StackPane(canvas);
         Scene scene = new Scene(root);
@@ -82,10 +66,6 @@ public class DrawingApplication extends Application {
         primaryStage.setTitle("Drawing Application");
         primaryStage.setScene(scene);
         primaryStage.show();
-
-
-
-
 
     }
 }
