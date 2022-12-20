@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="205.0" layoutY="35.0" text="Välkommen!" textAlignment="CENTER">
+         <font>
+            <Font name="Mongolian Baiti" size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="224.0" layoutY="86.0" text="Vad vill du göra idag?">
+         <font>
+            <Font name="Mongolian Baiti" size="17.0" />
+         </font>
+      </Label>
+      <Slider layoutX="442.0" layoutY="363.0" minorTickCount="10" nodeOrientation="LEFT_TO_RIGHT" snapToTicks="true" style="-fx-background-color: F;" styleClass="F" />
+      <Label layoutX="466.0" layoutY="346.0" text="MUSIC VOLUME">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
