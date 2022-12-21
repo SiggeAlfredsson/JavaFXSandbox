@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import static Paint.PaintController.showController;
+
 public class PaintApplication extends Application {
 
     @Override
@@ -53,6 +55,7 @@ public class PaintApplication extends Application {
         stage.setTitle("Paint");
         stage.setScene(scene);
         stage.show();
+        showController();
     }
 
 

@@ -14,6 +14,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static Paint.PaintApplication.showStage2;
+import static Paint.PaintController.showController;
 
 public class FXMLController implements Initializable {
 
