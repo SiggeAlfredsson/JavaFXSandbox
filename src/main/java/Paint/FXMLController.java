@@ -21,7 +21,11 @@ public class FXMLController implements Initializable {
     public Button selectSizeBtn;
 
 
+
     private Stage stage;
+
+
+
 
     public void setStage(Stage stage) {
         this.stage = stage;
