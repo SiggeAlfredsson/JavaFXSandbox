@@ -8,6 +8,10 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.nio.file.Path;
+
+
 public class Application extends javafx.application.Application {
 
     public static void main(String[] args) {
@@ -21,14 +25,19 @@ public class Application extends javafx.application.Application {
         Scene startScene = new Scene(root);
 
 
+
+
         stage.setTitle("JavaFX Sandbox!");
         stage.getIcons().add(new Image("icon.png"));
         stage.setResizable(false);
 
 
-      /*  Media media = new Media("music.mp3");  // This does not work. I think code is fine, just that it don't recognize the mp3 file as a mp3.
+        Media media = new Media(getClass().getResource("/music.wav").toURI().toString());
         MediaPlayer player = new MediaPlayer(media);
-        player.play(); */
+        player.play();
+
+        player.setVolume(0.1);
+        System.out.println(player.getVolume());
 
 
         stage.setScene(startScene);

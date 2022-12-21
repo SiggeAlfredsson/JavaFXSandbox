@@ -21,6 +21,7 @@ public class PaintApplication {
 
             Scene scene = new Scene(root);
 
+
             stage.setScene(scene);
         } catch (IOException e) {
             e.printStackTrace();

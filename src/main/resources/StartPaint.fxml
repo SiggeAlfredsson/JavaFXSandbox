@@ -16,7 +16,7 @@
             <Font name="Arial Bold" size="36.0" />
          </font>
       </Label>
-      <Spinner fx:id="widthSpinner" layoutX="37.0" layoutY="122.0" />
-      <Spinner fx:id="heightSpinner" layoutX="211.0" layoutY="122.0" />
+      <Spinner fx:id="widthSpinner" editable="true" layoutX="37.0" layoutY="122.0" />
+      <Spinner fx:id="heightSpinner" editable="true" layoutX="211.0" layoutY="122.0" />
    </children>
 </AnchorPane>
