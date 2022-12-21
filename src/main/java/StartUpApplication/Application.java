@@ -18,6 +18,7 @@ public class Application extends javafx.application.Application {
 
     private static MediaPlayer player;
 
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -40,10 +41,8 @@ public class Application extends javafx.application.Application {
 
         Media media = new Media(getClass().getResource("/music.wav").toURI().toString());
         player = new MediaPlayer(media);
-        player.setOnRepeat(media.getOnError());
         player.play();
-
-        player.setVolume(0.1);
+        player.setVolume(1);
         System.out.println(player.getVolume());
 
 

@@ -2,33 +2,30 @@ package Paint;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.scene.canvas.Canvas;
+import static Paint.PaintApplication.showStage2;
 
-public class Controller implements Initializable {
+public class FXMLController implements Initializable {
 
     public Button selectSizeBtn;
+
+
     private Stage stage;
-    private Scene scene;
-    private Parent root;
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
 
 
 
@@ -51,36 +48,10 @@ public class Controller implements Initializable {
         }
         Settings settings = new Settings(width, height);
 
-
-        //Parent root = FXMLLoader.load(getClass().getResource("/PaintApplication.fxml"));
-
-        Canvas canvas = new Canvas(settings.getWidth(), settings.getHeight());
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-
-        gc.setFill(Color.BLACK);
-
-        StackPane root = new StackPane(canvas);
-
-
-        canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, e -> {
-            double x = e.getX();
-            double y = e.getY();
-            gc.fillOval(x, y, 10, 10);
-
-
-        });
-
-
+        showStage2(settings);
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        //stage.setWidth(settings.getWidth());
-        //stage.setHeight(settings.getHeight());
-        stage.show();
-
-        System.out.println(settings.getHeight() + ":" + settings.getWidth());
+        stage.hide();
 
     }
 
