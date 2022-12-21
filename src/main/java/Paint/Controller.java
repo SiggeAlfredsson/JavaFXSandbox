@@ -15,8 +15,6 @@ public class Controller implements Initializable {
 
     public Button selectSizeBtn;
 
-    int widthSpinnerValue;
-    int heightSpinnerValue;
 
     @FXML
     private Spinner<Integer> heightSpinner;
@@ -26,17 +24,14 @@ public class Controller implements Initializable {
 
     @FXML
     void SelectSize(ActionEvent event) {
-        Settings settings = new Settings(widthSpinnerValue,heightSpinnerValue);
+        Settings settings = new Settings(widthSpinner.getValue(),heightSpinner.getValue());
 
         Button button = (Button) event.getSource();
         Stage stage = (Stage) button.getScene().getWindow();
         stage.hide();
 
 
-        PaintApplication startApplication = new PaintApplication();
-        startApplication.StartPaintApplicationStage();
-
-        startApplication.showStage();
+        System.out.println(settings.getHeight() + ":" + settings.getWidth());
 
     }
 
@@ -52,8 +47,6 @@ public class Controller implements Initializable {
         widthSpinner.setValueFactory(widthValueFactory);
         heightSpinner.setValueFactory(heightValueFactory);
 
-        widthSpinnerValue = widthSpinner.getValue();
-        heightSpinnerValue = heightSpinner.getValue();
 
     }
 }

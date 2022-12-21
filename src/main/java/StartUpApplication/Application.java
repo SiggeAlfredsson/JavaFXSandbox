@@ -1,5 +1,6 @@
 package StartUpApplication;
 
+import Paint.StartPaint;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,10 +22,12 @@ public class Application extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/ApplicationScene.fxml"));
-        Scene startScene = new Scene(root);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ApplicationScene.fxml"));
+        Parent root = loader.load();
+        Controller controller = loader.getController();
+        controller.setSecondStage(new StartPaint());
 
-
+        Scene scene = new Scene(root);
 
 
         stage.setTitle("JavaFX Sandbox!");
@@ -40,7 +43,7 @@ public class Application extends javafx.application.Application {
         System.out.println(player.getVolume());
 
 
-        stage.setScene(startScene);
+        stage.setScene(scene);
         stage.show();
     }
 }
