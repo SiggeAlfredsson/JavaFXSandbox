@@ -7,15 +7,21 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.scene.paint.Color;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.scene.canvas.Canvas;
 
 public class Controller implements Initializable {
 
@@ -33,8 +39,6 @@ public class Controller implements Initializable {
     private Spinner<Integer> widthSpinner;
 
 
-
-
     @FXML
     void SelectSize(ActionEvent event) throws IOException {
         int width = 0;
@@ -47,10 +51,33 @@ public class Controller implements Initializable {
         }
         Settings settings = new Settings(width, height);
 
-        Parent root = FXMLLoader.load(getClass().getResource("/PaintApplication.fxml"));
+
+        //Parent root = FXMLLoader.load(getClass().getResource("/PaintApplication.fxml"));
+
+        Canvas canvas = new Canvas(settings.getWidth(), settings.getHeight());
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+
+        gc.setFill(Color.BLACK);
+
+        StackPane root = new StackPane(canvas);
+
+
+        canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, e -> {
+            double x = e.getX();
+            double y = e.getY();
+            gc.fillOval(x, y, 10, 10);
+
+
+        });
+
+
+
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.setResizable(false);
+        //stage.setWidth(settings.getWidth());
+        //stage.setHeight(settings.getHeight());
         stage.show();
 
         System.out.println(settings.getHeight() + ":" + settings.getWidth());
@@ -60,6 +87,9 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
+
         SpinnerValueFactory<Integer> widthValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1,1920); // limited to 1920x1080 atm, in future make it able to scale!
         SpinnerValueFactory<Integer> heightValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1,1080);
 
