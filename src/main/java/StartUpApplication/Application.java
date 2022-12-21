@@ -1,6 +1,7 @@
 package StartUpApplication;
 
-import Paint.StartPaint;
+import Paint.PaintApplication;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,6 +16,8 @@ import java.nio.file.Path;
 
 public class Application extends javafx.application.Application {
 
+    private static MediaPlayer player;
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -25,7 +28,7 @@ public class Application extends javafx.application.Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ApplicationScene.fxml"));
         Parent root = loader.load();
         Controller controller = loader.getController();
-        controller.setSecondStage(new StartPaint());
+        controller.setPaintStage(new PaintApplication());
 
         Scene scene = new Scene(root);
 
@@ -36,7 +39,8 @@ public class Application extends javafx.application.Application {
 
 
         Media media = new Media(getClass().getResource("/music.wav").toURI().toString());
-        MediaPlayer player = new MediaPlayer(media);
+        player = new MediaPlayer(media);
+        player.setOnRepeat(media.getOnError());
         player.play();
 
         player.setVolume(0.1);

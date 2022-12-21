@@ -3,7 +3,7 @@ package StartUpApplication;
 
 
 import Paint.PaintApplication;
-import Paint.StartPaint;
+
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,9 +12,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
-import Paint.StartPaint;
+
 
 public class Controller implements Initializable {
 
@@ -25,32 +26,11 @@ public class Controller implements Initializable {
     @FXML
     private Slider volumeSlider;
 
-    private StartPaint secondStage;
+    private PaintApplication paintStage;
 
-    @FXML
-    public void initialize() {
-        paintBtn.setOnAction(event -> {
-            try {
-                secondStage.start(new Stage());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            paintBtn.getScene().getWindow().hide();
-        });
+    public void setPaintStage(PaintApplication paintStage) {
+        this.paintStage = paintStage;
     }
-
-    public void setSecondStage(StartPaint secondStage) {
-        this.secondStage = secondStage;
-    }
-
-
-
-
-      /*  PaintApplication drawingApp = new PaintApplication();
-        Stage drawingAppStage = new Stage();
-        drawingAppStage.setOnCloseRequest(event -> stage.show());
-        drawingApp.start(drawingAppStage); */
-
 
 
     @Override
@@ -60,7 +40,7 @@ public class Controller implements Initializable {
 
     public void paint(ActionEvent actionEvent) {
         try {
-            secondStage.start(new Stage());
+            paintStage.start(new Stage());
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,7 +1,10 @@
 Here I add what im doing if im closing when im not finished with a project.
 
 
-Make application show when closing startpaint.
+Make application show when closing paint.
+
+Make paint size scaleable.
+
 
 
 
