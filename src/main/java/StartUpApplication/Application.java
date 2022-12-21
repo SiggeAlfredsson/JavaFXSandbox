@@ -39,11 +39,11 @@ public class Application extends javafx.application.Application {
         stage.setResizable(false);
 
 
-        Media media = new Media(getClass().getResource("/music.wav").toURI().toString());
+      /*  Media media = new Media(getClass().getResource("/music.wav").toURI().toString());
         player = new MediaPlayer(media);
         player.play();
         player.setVolume(1);
-        System.out.println(player.getVolume());
+        System.out.println(player.getVolume()); */
 
 
         stage.setScene(scene);

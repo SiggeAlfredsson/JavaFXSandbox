@@ -24,6 +24,14 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Button fx:id="paintBtn" layoutX="250.0" layoutY="200.0" mnemonicParsing="false" onAction="#paint" text="I want to paint!" />
+      <Button fx:id="paintBtn" layoutX="250.0" layoutY="200.0" mnemonicParsing="false" onAction="#paint" text="PAINT">
+         <font>
+            <Font name="Times New Roman" size="16.0" />
+         </font></Button>
+      <Button disable="true" layoutX="405.0" layoutY="203.0" mnemonicParsing="false" text="MUSICPLAYER">
+         <font>
+            <Font name="Times New Roman Bold" size="16.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
