@@ -74,7 +74,6 @@ public class PaintApplication extends Application {
         stage.setScene(scene);
         stage.show();
         showController();
-        stage.toFront();
     }
 
     public static void saveCanvas() {
@@ -89,22 +88,6 @@ public class PaintApplication extends Application {
                 e.printStackTrace();
             }
         }
-    }
-
-    public static void  drawStraightLine() {
-        canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, e -> {
-            double x = e.getX();
-            double y = e.getY();
-            gc.moveTo(x,y);
-        });
-
-        canvas.addEventHandler(MouseEvent.MOUSE_RELEASED, e -> {
-            double x = e.getX();
-            double y = e.getY();
-            gc.lineTo(x, y);
-            gc.stroke();
-            gc.moveTo(x, y);
-        });
     }
 
     public static void  clearCanvas() {

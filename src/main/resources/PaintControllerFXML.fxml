@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
@@ -28,12 +29,15 @@
       </Label>
       <Button fx:id="btnSave" layoutX="462.0" layoutY="19.0" mnemonicParsing="false" onAction="#btnSaveEvent" text="Save as (PNG)" />
       <Button fx:id="btnClear" layoutX="559.0" layoutY="19.0" mnemonicParsing="false" onAction="#btnClearEvent" text="Erase all" />
-      <ToggleButton fx:id="btnBrush" layoutX="21.0" layoutY="135.0" mnemonicParsing="false" onAction="#btnBrushEvent" text="Brush" />
-      <ToggleButton fx:id="btnCircle" layoutX="74.0" layoutY="135.0" mnemonicParsing="false" onAction="#btnCircleEvent" text="Circle" />
+      <ToggleButton fx:id="btnBrush" layoutX="21.0" layoutY="135.0" mnemonicParsing="false" onAction="#btnBrushEvent" text="Brush">
+         <toggleGroup>
+            <ToggleGroup fx:id="toggleButtons" />
+         </toggleGroup></ToggleButton>
+      <ToggleButton fx:id="btnCircle" layoutX="74.0" layoutY="135.0" mnemonicParsing="false" onAction="#btnCircleEvent" text="Circle" toggleGroup="$toggleButtons" />
       <Button layoutX="462.0" layoutY="50.0" mnemonicParsing="false" text="Undo" />
       <Button layoutX="508.0" layoutY="50.0" mnemonicParsing="false" text="Redo" />
-      <ToggleButton fx:id="btnEraser" layoutX="260.0" layoutY="135.0" mnemonicParsing="false" onAction="#btnEraserEvent" text="Eraser (circle)" />
-      <ToggleButton fx:id="btnLine" layoutX="169.0" layoutY="135.0" mnemonicParsing="false" onAction="#btnLineEvent" text="Straight Line" />
+      <ToggleButton fx:id="btnEraser" disable="true" layoutX="260.0" layoutY="135.0" mnemonicParsing="false" onAction="#btnEraserEvent" text="Eraser (circle)" toggleGroup="$toggleButtons" />
+      <ToggleButton fx:id="btnLine" layoutX="169.0" layoutY="135.0" mnemonicParsing="false" onAction="#btnLineEvent" text="Straight Line" toggleGroup="$toggleButtons" />
       <Slider fx:id="boxSlider" layoutX="26.0" layoutY="93.0" showTickMarks="true" value="50.0" />
       <Label layoutX="213.0" layoutY="79.0" text="Eraser Size">
          <font>
@@ -62,6 +66,6 @@
             <Font name="Times New Roman Bold" size="12.0" />
          </font>
       </Label>
-      <ToggleButton fx:id="btnBox" layoutX="126.0" layoutY="135.0" mnemonicParsing="false" onAction="#btnBoxEvent" text="Box" />
+      <ToggleButton fx:id="btnBox" layoutX="126.0" layoutY="135.0" mnemonicParsing="false" onAction="#btnBoxEvent" text="Box" toggleGroup="$toggleButtons" />
    </children>
 </AnchorPane>
