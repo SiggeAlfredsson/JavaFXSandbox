@@ -2,6 +2,7 @@ package Paint;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -9,7 +10,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
@@ -76,7 +79,6 @@ public class PaintController implements Initializable {
     void btnBrushEvent(ActionEvent event) {
 
         gc.setStroke(Color.BLACK);
-        gc.setLineWidth(5);
             canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, e -> {
                 if (btnBrush.isSelected()) {
                     gc.beginPath();
@@ -86,14 +88,17 @@ public class PaintController implements Initializable {
                 }
             });
 
-            canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, e -> {
-                if (btnBrush.isSelected()) {
-                    double x = e.getX();
-                    double y = e.getY();
-                    gc.lineTo(x, y);
-                    gc.stroke();
-                }
-            });
+        canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, e -> {
+            if (btnBrush.isSelected()) {
+                double x = e.getX();
+                double y = e.getY();
+                gc.lineTo(x, y);
+                gc.stroke();
+                gc.closePath();
+                gc.beginPath();
+                gc.moveTo(x, y);
+            }
+        });
     } // done
 
     @FXML
@@ -116,37 +121,26 @@ public class PaintController implements Initializable {
 
     double startX;
     double startY;
-    double endX;
-    double endY;
     @FXML
     void btnLineEvent(ActionEvent event) {
-        if (btnLine.isSelected()) {
-            canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, e -> {
+        canvas.setOnMousePressed(e -> {
+            if (btnLine.isSelected()) {
                 startX = e.getX();
                 startY = e.getY();
-            });
+            } else if (btnBrush.isSelected()) {
+                gc.beginPath();
+                gc.moveTo(e.getX(), e.getY());
+            }
+        });
 
-            canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, e -> {
-                endX = e.getX();
-                endY = e.getY();
-                gc.setStroke(Color.GRAY);
-                gc.setLineDashes(5, 5);
-                gc.strokeLine(startX, startY, endX, endY);
-            });
-
-            canvas.addEventHandler(MouseEvent.MOUSE_RELEASED, e -> {
-                endX = e.getX();
-                endY = e.getY();
-                double minX = Math.min(startX, endX);
-                double minY = Math.min(startY, endY);
-                double maxX = Math.max(startX, endX);
-                double maxY = Math.max(startY, endY);
-                gc.clearRect(minX, minY, maxX - minX, maxY - minY);
-                gc.setStroke(Color.BLACK);
-                gc.setLineDashes(0);
-                gc.strokeLine(startX, startY, endX, endY);
-            });
-        }
+        canvas.setOnMouseReleased(e -> {
+            if (btnLine.isSelected()) {
+                gc.strokeLine(startX, startY, e.getX(), e.getY());
+            } else if (btnBrush.isSelected()) {
+                gc.lineTo(e.getX(), e.getY());
+                gc.stroke();
+            }
+        });
     }
 
 
@@ -167,6 +161,15 @@ public class PaintController implements Initializable {
     }
 
 
+    @FXML
+    private ColorPicker colorSelect;
+
+    @FXML
+    void ColorSelectEvent(ActionEvent event) {
+
+    }
+
+
     public static void showController() throws IOException {
         Stage stage = new Stage();
 
@@ -183,12 +186,20 @@ public class PaintController implements Initializable {
 
         stage.setScene(scene);
         stage.show();
+        gc.setLineWidth(5);
 
     }
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        colorSelect.valueProperty().addListener((ObservableValue<? extends Color> observable, Color oldValue, Color newValue) -> {
+            gc.setStroke(newValue);
+        });
+
+
+
         brushSlider.valueProperty().addListener(new InvalidationListener() {
             @Override
             public void invalidated(Observable observable) {

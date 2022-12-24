@@ -13,12 +13,12 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="632.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Paint.PaintController">
    <children>
       <Slider fx:id="brushSlider" layoutX="26.0" layoutY="38.0" showTickMarks="true" value="50.0" />
-      <Label layoutX="53.0" layoutY="25.0" text="Brush Thickness">
+      <Label layoutX="41.0" layoutY="25.0" text="Brush/Line Thickness">
          <font>
             <Font name="Times New Roman Bold" size="12.0" />
          </font>
       </Label>
-      <ColorPicker layoutX="316.0" layoutY="33.0">
+      <ColorPicker fx:id="colorSelect" layoutX="316.0" layoutY="33.0" onAction="#ColorSelectEvent">
          <value>
             <Color />
          </value></ColorPicker>
@@ -50,12 +50,6 @@
          </value>
       </ColorPicker>
       <Label layoutX="336.0" layoutY="68.0" text="Circle/Box Color">
-         <font>
-            <Font name="Times New Roman Bold" size="12.0" />
-         </font>
-      </Label>
-      <Slider fx:id="lineSlider" layoutX="172.0" layoutY="39.0" showTickMarks="true" value="50.0" />
-      <Label layoutX="203.0" layoutY="26.0" text="Line Thickness">
          <font>
             <Font name="Times New Roman Bold" size="12.0" />
          </font>
