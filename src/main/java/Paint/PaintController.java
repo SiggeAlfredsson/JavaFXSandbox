@@ -1,9 +1,12 @@
 package Paint;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -16,11 +19,13 @@ import javafx.stage.Stage;
 
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import static Paint.PaintApplication.canvas;
 import static Paint.PaintApplication.gc;
 
-public class PaintController {
+public class PaintController implements Initializable {
 
     @FXML
     private Slider boxSlider;
@@ -70,7 +75,8 @@ public class PaintController {
     @FXML
     void btnBrushEvent(ActionEvent event) {
 
-
+        gc.setStroke(Color.BLACK);
+        gc.setLineWidth(5);
             canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, e -> {
                 if (btnBrush.isSelected()) {
                     gc.beginPath();
@@ -181,4 +187,13 @@ public class PaintController {
     }
 
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        brushSlider.valueProperty().addListener(new InvalidationListener() {
+            @Override
+            public void invalidated(Observable observable) {
+                gc.setLineWidth(brushSlider.getValue() /10);
+            }
+        });
+    }
 }
