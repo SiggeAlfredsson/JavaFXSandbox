@@ -68,11 +68,11 @@ public class PaintController implements Initializable {
             if (btnBox.isSelected()) {
                 double x = e.getX();
                 double y = e.getY();
-                gc.fillRect(x , y , objectSize , objectSize);
+                gc.fillRect(x - objectSize / 2, y - objectSize / 2, objectSize, objectSize);
             }
         });
 
-    } //done
+    }
 
     @FXML
     void btnBrushEvent(ActionEvent event) {
@@ -97,11 +97,10 @@ public class PaintController implements Initializable {
                 gc.moveTo(x, y);
             }
         });
-    } // done
+    }
 
 
     double objectSize = 50;
-    String objectColor;
 
     @FXML
     void btnCircleEvent(ActionEvent event) {
@@ -109,10 +108,10 @@ public class PaintController implements Initializable {
             if (btnCircle.isSelected()) {
                 double x = e.getX();
                 double y = e.getY();
-                gc.fillOval(x , y , objectSize , objectSize);
+                gc.fillOval(x - objectSize / 2, y - objectSize / 2, objectSize, objectSize);
             }
         });
-    } //done
+    }
 
 
     @FXML
