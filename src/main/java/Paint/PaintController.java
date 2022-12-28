@@ -31,7 +31,7 @@ import static Paint.PaintApplication.gc;
 public class PaintController implements Initializable {
 
     @FXML
-    private Slider boxSlider;
+    private Slider objectSizeSlider;
 
     @FXML
     private Slider brushSlider;
@@ -60,8 +60,7 @@ public class PaintController implements Initializable {
     @FXML
     private Slider eraserSlider;
 
-    @FXML
-    private Slider lineSlider;
+
 
     @FXML
     void btnBoxEvent(ActionEvent event) {
@@ -69,7 +68,7 @@ public class PaintController implements Initializable {
             if (btnBox.isSelected()) {
                 double x = e.getX();
                 double y = e.getY();
-                gc.fillRect(x , y , 10 , 10);
+                gc.fillRect(x , y , objectSize , objectSize);
             }
         });
 
@@ -78,7 +77,6 @@ public class PaintController implements Initializable {
     @FXML
     void btnBrushEvent(ActionEvent event) {
 
-        gc.setStroke(Color.BLACK);
             canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, e -> {
                 if (btnBrush.isSelected()) {
                     gc.beginPath();
@@ -101,13 +99,17 @@ public class PaintController implements Initializable {
         });
     } // done
 
+
+    double objectSize = 50;
+    String objectColor;
+
     @FXML
     void btnCircleEvent(ActionEvent event) {
         canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, e -> {
             if (btnCircle.isSelected()) {
                 double x = e.getX();
                 double y = e.getY();
-                gc.fillOval(x , y , 10 , 10);
+                gc.fillOval(x , y , objectSize , objectSize);
             }
         });
     } //done
@@ -147,10 +149,6 @@ public class PaintController implements Initializable {
 
 
     @FXML
-    private Slider brushThicknessSlider;
-
-
-    @FXML
     void btnSaveEvent(ActionEvent event) {
         PaintApplication.saveCanvas();
     }
@@ -163,6 +161,9 @@ public class PaintController implements Initializable {
 
     @FXML
     private ColorPicker colorSelect;
+
+    @FXML
+    private ColorPicker objectColorSelect;
 
     @FXML
     void ColorSelectEvent(ActionEvent event) {
@@ -198,12 +199,23 @@ public class PaintController implements Initializable {
             gc.setStroke(newValue);
         });
 
+        objectColorSelect.valueProperty().addListener((ObservableValue<? extends Color> observable, Color oldValue, Color newValue) -> {
+            gc.setFill(newValue);
+        });
+
 
 
         brushSlider.valueProperty().addListener(new InvalidationListener() {
             @Override
             public void invalidated(Observable observable) {
                 gc.setLineWidth(brushSlider.getValue() /10);
+            }
+        });
+
+        objectSizeSlider.valueProperty().addListener(new InvalidationListener() {
+            @Override
+            public void invalidated(Observable observable) {
+                objectSize=(objectSizeSlider.getValue());
             }
         });
     }
